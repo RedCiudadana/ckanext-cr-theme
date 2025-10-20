@@ -1,0 +1,50 @@
+{% ckan_extends %}
+
+{% block header_logo %}
+<div class="navbar-left">
+    <a class="logo" href="{{ h.url_for('home.index') }}">
+        <img src="/img/logos/MICITT.png" alt="{{ g.site_title }}" title="{{ g.site_title }}" />
+    </a>
+</div>
+{% endblock %}
+
+{% block header_site_search %}
+<div class="d-flex gap-2" style="font-size: 0.8rem;">
+    <a href="https://www.facebook.com/micitcr" target="_blank" style="color: #182951">
+        <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <a href="https://x.com/micittcr" target="_blank" style="color: #182951">
+        <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-x-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <a href="https://www.instagram.com/micittcr/" target="_blank" style="color: #182951">
+        <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <a href="https://www.youtube.com/user/micitcrc" target="_blank" style="color: #182951">
+        <span class="fa-stack">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</div>
+{% endblock %}
+
+{% block header_site_navigation_tabs %}
+    {% set org_type = h.default_group_type('organization') %}
+    {% set group_type = h.default_group_type('group') %}
+
+    {{ h.build_nav_main(
+    ('home.index', _('Inicio')),
+    (dataset_type ~ '.search', _('Conjuntos de Datos'), ["dataset", "resource"]),) }}
+
+    <li><a href="/pages/pida">{{ _('PIDA') }}</a></li>
+    <li><a href="/about">{{ _('About') }}</a></li>
+{% endblock %}

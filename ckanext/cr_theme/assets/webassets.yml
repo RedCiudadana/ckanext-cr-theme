@@ -1,0 +1,14 @@
+# cr_theme-js:
+#   filter: rjsmin
+#   output: ckanext-cr_theme/%(version)s-cr_theme.js
+#   contents:
+#     - js/cr_theme.js
+#   extra:
+#     preload:
+#       - base/main
+
+# cr_theme-css:
+#   filter: cssrewrite
+#   output: ckanext-cr_theme/%(version)s-cr_theme.css
+#   contents:
+#     - css/cr_theme.css
