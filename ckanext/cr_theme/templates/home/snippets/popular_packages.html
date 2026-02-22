@@ -1,0 +1,19 @@
+{% set packages = h.get_popular_packages(4) %}
+
+<div class="row featured_groups">
+    <div class="col-12 text-center">
+        <h1>{{ _('Conjuntos de datos populares') }}</h1>
+        <p>Explora las categorías de conjuntos de datos.</p>
+    </div>
+    {% for package in packages %}
+        {% snippet "home/snippets/package_i.html", item=package, position=False %}
+    {% endfor %}
+    <div class="col-12 text-center" style="margin-bottom: 50px;">
+        <a
+        href="{% url_for 'dataset.search', sort='views_recent desc'%}"
+        class="dark-link feed_group_link"
+        >
+        {{ _('Ver todos los conjuntos') }}
+        </a>
+    </div>
+</div>

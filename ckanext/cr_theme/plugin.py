@@ -3,6 +3,27 @@ from __future__ import annotations
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
+def get_popular_packages(limit):
+    result = []
+    try:
+        packages = toolkit.get_action('package_search')({}, {
+            'sort': 'views_recent desc',
+            'rows': 3,
+        })
+
+        result = packages['results']
+    except:
+        result = []
+
+    return result
+
+def get_extra_value(extras, key):
+    """Fetch the value of an extra field by key."""
+    for extra in extras:
+        if extra.get('key') == key:
+            return extra.get('value')
+    return None
+
 class CrThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     # plugins.implements(plugins.IMiddleware, inherit=True)
@@ -26,3 +47,9 @@ class CrThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         # registers itself as the default (above).
         return []
 
+    #ITemplateHelpers
+    def get_helpers(self):
+        return {
+            'get_popular_packages': get_popular_packages,
+            'get_extra_value': get_extra_value,
+        }
