@@ -7,8 +7,13 @@
 
 <a href="{{ url }}" class="home-group-item col-12 d-flex shadow">
   <div class="img">
-    <img src="{{ item.image_display_url or image or h.url_for_static('/img/icons/placeholder-item.png') }}"
-      alt="{{ item.name }}" title="img" class="media-image img-fluid">
+     {% if package.organization and package.organization.image_url %}
+        <img src="{{ package.organization.image_url if package.organization.image_url.startswith('https') else h.url_for_static('/uploads/group/' ~ package.organization.image_url) }}"
+        alt="{{ item.name }}" title="img" class="media-image img-fluid">
+    {% else %}
+      <img src="{{ item.image_display_url or image or h.url_for_static('/base/images/placeholder-group.png') }}"
+          alt="{{ item.name }}" title="img" class="media-image img-fluid">
+    {% endif %}
   </div>
   <div class="text">
     <h3>{{ item.display_name or item.title }}</h3>
